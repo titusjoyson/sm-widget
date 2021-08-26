@@ -1,25 +1,28 @@
 import React from 'react';
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
-import { Provider, teamsTheme } from '@fluentui/react-northstar';
+import * as reactNorthstar from '@fluentui/react-northstar';
 import Header from '../pages/base/title.view';
 import FeedList from '../pages/feeds/feeds.view';
 import Separator from '../components/separator/separator.view';
+import SettingsView from '../pages/settings/settings.view';
+import * as routs from './routs';
 import './App.global.css';
 
 export default function App() {
   return (
     <Router>
       <div style={{ width: 300 }} className="header">
-        <Provider theme={teamsTheme}>
+        <reactNorthstar.Provider theme={reactNorthstar.teamsTheme}>
           <Header />
-        </Provider>
+        </reactNorthstar.Provider>
       </div>
       <Separator />
-      <Provider theme={teamsTheme}>
+      <reactNorthstar.Provider theme={reactNorthstar.teamsDarkTheme}>
         <Switch>
-          <Route path="/" component={FeedList} />
+          <Route exact path={routs.SETTINGS} component={SettingsView} />
+          <Route path={routs.HOME} component={FeedList} />
         </Switch>
-      </Provider>
+      </reactNorthstar.Provider>
     </Router>
   );
 }

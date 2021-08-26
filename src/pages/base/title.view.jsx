@@ -10,6 +10,8 @@ import {
   TrashCanIcon,
   MarkAsUnreadIcon,
 } from '@fluentui/react-icons-northstar';
+import { useHistory } from 'react-router-dom';
+import * as routs from '../../renderer/routs';
 import './title.styles.css';
 
 const leftItems = [
@@ -107,29 +109,41 @@ const items = [
   },
 ];
 
-const MenuExampleToolbarShorthand = () => (
-  <>
-    <Flex hAlign="stretch" space="between" className="header">
-      <Menu
-        defaultActiveIndex={0}
-        items={leftItems}
-        iconOnly
-        accessibility={menuAsToolbarBehavior}
-        aria-label="Drag Window"
-        disabled
-        className="header-dragger"
-      />
-      <Flex.Item hAlign="stretch">
+const MenuExampleToolbarShorthand = ({  }) => {
+  const history = useHistory();
+
+  return (
+    <>
+      <Flex hAlign="stretch" space="between" className="header">
         <Menu
           defaultActiveIndex={0}
-          items={items}
+          items={leftItems}
           iconOnly
           accessibility={menuAsToolbarBehavior}
-          aria-label="Compose Editor"
+          aria-label="Drag Window"
+          disabled
+          className="header-dragger"
         />
-      </Flex.Item>
-    </Flex>
-  </>
-);
+        <Flex.Item hAlign="stretch">
+          <Menu
+            defaultActiveIndex={0}
+            onActiveIndexChange={(e, idx) => {
+              const selectedItem = items[idx.activeIndex];
+              if (selectedItem.key == "feed"){
+                history.push(routs.HOME);
+              } else if (selectedItem.key == "settings"){
+                history.push(routs.SETTINGS);
+              }
+            }}
+            items={items}
+            iconOnly
+            accessibility={menuAsToolbarBehavior}
+            aria-label="Compose Editor"
+          />
+        </Flex.Item>
+      </Flex>
+    </>
+  );
+};
 
 export default MenuExampleToolbarShorthand;
