@@ -8,12 +8,32 @@ import {
   Avatar,
   Text,
   Image,
+  Button,
+  TableAddIcon,
 } from '@fluentui/react-northstar';
 import './feeds.styles.css';
 
+function AddLink() {
+  return (
+    <Card expandable>
+      <CardBody>
+        <Flex column gap="gap.small">
+          <Button
+            inverted
+            content="Link Feeds"
+            icon={<TableAddIcon />}
+            iconOnly
+            title="Create"
+          />
+        </Flex>
+      </CardBody>
+    </Card>
+  );
+}
+
 function FeedCard() {
   return (
-    <Card>
+    <Card expandable>
       <CardHeader>
         <Flex gap="gap.small">
           <Avatar
@@ -68,6 +88,7 @@ class FeedList extends React.Component {
           backgroundColor: 'transparent',
         }}
       >
+        <AddLink />
         <ReactList
           itemRenderer={this.renderItem}
           length={data.length}

@@ -5,6 +5,7 @@ import Header from '../pages/base/title.view';
 import FeedList from '../pages/feeds/feeds.view';
 import Separator from '../components/separator/separator.view';
 import SettingsView from '../pages/settings/settings.view';
+import SitesView from '../pages/sites/site.view';
 import * as routs from './routs';
 import './App.global.css';
 
@@ -20,6 +21,7 @@ export default function App() {
       <reactNorthstar.Provider theme={reactNorthstar.teamsDarkTheme}>
         <Switch>
           <Route exact path={routs.SETTINGS} component={SettingsView} />
+          <Route exact path={routs.SITES} component={SitesView} />
           <Route path={routs.HOME} component={FeedList} />
         </Switch>
       </reactNorthstar.Provider>

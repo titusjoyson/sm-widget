@@ -9,6 +9,7 @@ import {
   TranslationIcon,
   TrashCanIcon,
   MarkAsUnreadIcon,
+  ChevronEndIcon,
 } from '@fluentui/react-icons-northstar';
 import { useHistory } from 'react-router-dom';
 import * as routs from '../../renderer/routs';
@@ -39,16 +40,17 @@ const items = [
     ),
     key: 'feed',
     'aria-label': 'Feed List',
+    indicator: <ChevronEndIcon outline />,
   },
   {
     icon: (
-      <AddIcon
+      <BookmarkIcon
         {...{
           outline: true,
         }}
       />
     ),
-    key: 'add',
+    key: 'sites',
     'aria-label': 'Add Tool',
   },
   {
@@ -109,7 +111,7 @@ const items = [
   },
 ];
 
-const MenuExampleToolbarShorthand = ({  }) => {
+const MenuExampleToolbarShorthand = () => {
   const history = useHistory();
 
   return (
@@ -129,10 +131,12 @@ const MenuExampleToolbarShorthand = ({  }) => {
             defaultActiveIndex={0}
             onActiveIndexChange={(e, idx) => {
               const selectedItem = items[idx.activeIndex];
-              if (selectedItem.key == "feed"){
+              if (selectedItem.key === 'feed') {
                 history.push(routs.HOME);
-              } else if (selectedItem.key == "settings"){
+              } else if (selectedItem.key === 'settings') {
                 history.push(routs.SETTINGS);
+              } else if (selectedItem.key === 'sites') {
+                history.push(routs.SITES);
               }
             }}
             items={items}
