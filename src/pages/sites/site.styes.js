@@ -5,9 +5,7 @@ const styles = {
     borderRadius: 5,
   },
   container: {
-    paddingTop: 20,
     paddingBottom: 20,
-    display: 'block',
   },
 };
 

@@ -10,6 +10,7 @@ import {
   TrashCanIcon,
   MarkAsUnreadIcon,
   ChevronEndIcon,
+  CircleIcon,
 } from '@fluentui/react-icons-northstar';
 import { useHistory } from 'react-router-dom';
 import * as routs from '../../renderer/routs';
@@ -18,9 +19,9 @@ import './title.styles.css';
 const leftItems = [
   {
     icon: (
-      <GridIcon
+      <CircleIcon
         {...{
-          outline: true,
+          outline: false,
         }}
       />
     ),
@@ -118,7 +119,7 @@ const MenuExampleToolbarShorthand = () => {
     <>
       <Flex hAlign="stretch" space="between" className="header">
         <Menu
-          defaultActiveIndex={0}
+          defaultActiveIndex={1}
           items={leftItems}
           iconOnly
           accessibility={menuAsToolbarBehavior}

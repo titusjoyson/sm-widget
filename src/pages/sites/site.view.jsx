@@ -1,11 +1,20 @@
 import React from 'react';
-import { Image, Flex, List, Checkbox } from '@fluentui/react-northstar';
+import {
+  Image,
+  Flex,
+  List,
+  Checkbox,
+  Header,
+  Divider,
+} from '@fluentui/react-northstar';
 import TwitterIcon from '../../assets/icons/twitter.png';
 import styles from './site.styes.js';
 
 function SitesView() {
   return (
-    <Flex style={styles.container}>
+    <Flex column style={styles.container}>
+      <Header as="h2" content="Link Sites" style={{ paddingLeft: 20 }} />
+      <Divider />
       <List>
         <List.Item
           media={

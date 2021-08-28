@@ -16,9 +16,7 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-
-const WINDOW_WIDTH = 300;
-const WINDOW_MARGIN = 20;
+import config from '../config';
 
 export default class AppUpdater {
   constructor() {
@@ -34,6 +32,29 @@ ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
   event.reply('ipc-example', msgTemplate('pong'));
+});
+
+ipcMain.on('get-max-window-size', async (event) => {
+  const msgTemplate = (height: number) => `${height}`;
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const maxWindowHeight = config.getMaxHeight(width, height);
+  event.reply('get-max-window-size', msgTemplate(maxWindowHeight));
+});
+
+ipcMain.on('resize-window', async (event, newWidth, newHeight) => {
+  let finalHeight = newHeight;
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  const maxWindowHeight = config.getMaxHeight(width, height);
+
+  if (newHeight > maxWindowHeight) {
+    finalHeight = maxWindowHeight;
+  }
+  console.log(`Window Resize: ${newWidth} ${finalHeight}`);
+  if (mainWindow) {
+    mainWindow.setResizable(true);
+    mainWindow.setSize(newWidth, finalHeight);
+    mainWindow.setResizable(false);
+  }
 });
 
 if (process.env.NODE_ENV === 'production') {
@@ -78,9 +99,9 @@ const createWindow = async () => {
   };
 
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  const xLocation = width - WINDOW_WIDTH - WINDOW_MARGIN;
-  const yLocation = height - (height - WINDOW_MARGIN);
-  const windowHeight = height - WINDOW_MARGIN * 2;
+  const xLocation = width - config.WINDOW_WIDTH - config.WINDOW_MARGIN;
+  const yLocation = height - (height - config.WINDOW_MARGIN);
+  const maxWindowHeight = config.getMaxHeight(width, height);
 
   mainWindow = new BrowserWindow({
     x: xLocation,
@@ -92,11 +113,11 @@ const createWindow = async () => {
     movable: true,
     alwaysOnTop: false,
     titleBarStyle: 'hidden',
-    width: WINDOW_WIDTH,
-    height: windowHeight,
+    width: config.WINDOW_WIDTH,
+    height: maxWindowHeight,
     icon: getAssetPath('icon.png'),
     webPreferences: {
-      devTools: false,
+      devTools: config.DEV_TOOLS,
       preload: path.join(__dirname, 'preload.js'),
     },
   });
