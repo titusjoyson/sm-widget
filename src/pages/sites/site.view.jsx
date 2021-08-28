@@ -8,7 +8,7 @@ import {
   Divider,
 } from '@fluentui/react-northstar';
 import TwitterIcon from '../../assets/icons/twitter.png';
-import styles from './site.styes.js';
+import styles from './site.styes';
 
 function SitesView() {
   return (

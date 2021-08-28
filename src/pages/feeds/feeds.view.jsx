@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactList from 'react-list';
 import { Flex } from '@fluentui/react-northstar';
-import AddFeedCard from '../../components/card/AddFeedCard';
+// import AddFeedCard from '../../components/card/AddFeedCard';
 import FeedCard from '../../components/card/FeedCard';
 import './feeds.styles.css';
 

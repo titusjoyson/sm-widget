@@ -2,7 +2,6 @@ import React from 'react';
 import { Menu, menuAsToolbarBehavior, Flex } from '@fluentui/react-northstar';
 import {
   GridIcon,
-  AddIcon,
   SettingsIcon,
   MoreIcon,
   BookmarkIcon,

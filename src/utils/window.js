@@ -6,4 +6,5 @@ function updateWindowHeight(height) {
   }
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export { updateWindowHeight };

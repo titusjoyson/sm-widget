@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import * as reactNorthstar from '@fluentui/react-northstar';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../pages/base/title.view';
@@ -32,7 +32,7 @@ export default function App() {
 
   useEffect(() => {
     if (pathname === routs.HOME) {
-      updateWindowHeight(parseInt(config.MAX_WINDOW_HEIGHT));
+      updateWindowHeight(Number(config.MAX_WINDOW_HEIGHT));
     } else if (height && height > 0) {
       updateWindowHeight(height);
     }
