@@ -44,6 +44,7 @@ export default {
   plugins: [
     new webpack.EnvironmentPlugin({
       NODE_ENV: 'production',
+      NEWSAPI_API_KEY: JSON.stringify(process.env.NEWSAPI_API_KEY || 'xxxxxxxx'),
     }),
   ],
 };

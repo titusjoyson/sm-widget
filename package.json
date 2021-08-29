@@ -4,15 +4,15 @@
   "description": "Electron application boilerplate based on React, React Router, Webpack, React Fast Refresh for rapid application development",
   "scripts": {
     "build": "concurrently \"yarn build:main\" \"yarn build:renderer\"",
-    "build:main": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
-    "build:renderer": "cross-env NODE_ENV=production webpack --config ./.erb/configs/webpack.config.renderer.prod.babel.js",
+    "build:main": "env-cmd -f ./.env webpack --config ./.erb/configs/webpack.config.main.prod.babel.js",
+    "build:renderer": "env-cmd -f ./.env webpack --config ./.erb/configs/webpack.config.renderer.prod.babel.js",
     "rebuild": "electron-rebuild --parallel --types prod,dev,optional --module-dir src",
-    "lint": "cross-env NODE_ENV=development eslint . --cache --ext .js,.jsx,.ts,.tsx",
+    "lint": "env-cmd -f ./.env eslint . --cache --ext .js,.jsx,.ts,.tsx",
     "package": "node -r @babel/register ./.erb/scripts/clean.js dist release && yarn build && electron-builder build --publish never",
     "postinstall": "node -r @babel/register .erb/scripts/check-native-dep.js && electron-builder install-app-deps && yarn cross-env NODE_ENV=development webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.babel.js && opencollective-postinstall && yarn-deduplicate yarn.lock",
     "start": "node -r @babel/register ./.erb/scripts/check-port-in-use.js && yarn start:renderer",
-    "start:main": "cross-env NODE_ENV=development electron -r ./.erb/scripts/babel-register ./src/main/main.ts",
-    "start:renderer": "cross-env NODE_ENV=development webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
+    "start:main": "env-cmd -f ./.env electron -r ./.erb/scripts/babel-register ./src/main/main.ts",
+    "start:renderer": "env-cmd -f ./.env webpack serve --config ./.erb/configs/webpack.config.renderer.dev.babel.js",
     "test": "jest"
   },
   "lint-staged": {
@@ -249,9 +249,10 @@
     "@fluentui/react-northstar": "^0.57.0",
     "electron-debug": "^3.2.0",
     "electron-log": "^4.3.5",
-    "electron-store": "^8.0.0",
     "electron-updater": "^4.3.8",
+    "env-cmd": "^10.1.0",
     "history": "4.x.x",
+    "newsapi": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-list": "^0.8.16",
@@ -259,9 +260,8 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.1",
     "redux-persist": "^6.0.0",
-    "redux-persist-electron-storage": "^2.1.0",
     "redux-thunk": "^2.3.0",
-    "regenerator-runtime": "^0.13.5"
+    "twitter-v2": "^1.1.0"
   },
   "devEngines": {
     "node": ">=10.x",
